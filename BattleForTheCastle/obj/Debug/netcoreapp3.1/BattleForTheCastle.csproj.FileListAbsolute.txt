@@ -1,0 +1,12 @@
+C:\Users\ilian\source\Projets solo\MusicChanger\BattleForTheCastle\BattleForTheCastle\bin\Debug\netcoreapp3.1\BattleForTheCastle.exe
+C:\Users\ilian\source\Projets solo\MusicChanger\BattleForTheCastle\BattleForTheCastle\bin\Debug\netcoreapp3.1\BattleForTheCastle.deps.json
+C:\Users\ilian\source\Projets solo\MusicChanger\BattleForTheCastle\BattleForTheCastle\bin\Debug\netcoreapp3.1\BattleForTheCastle.runtimeconfig.json
+C:\Users\ilian\source\Projets solo\MusicChanger\BattleForTheCastle\BattleForTheCastle\bin\Debug\netcoreapp3.1\BattleForTheCastle.runtimeconfig.dev.json
+C:\Users\ilian\source\Projets solo\MusicChanger\BattleForTheCastle\BattleForTheCastle\bin\Debug\netcoreapp3.1\BattleForTheCastle.dll
+C:\Users\ilian\source\Projets solo\MusicChanger\BattleForTheCastle\BattleForTheCastle\bin\Debug\netcoreapp3.1\BattleForTheCastle.pdb
+C:\Users\ilian\source\Projets solo\MusicChanger\BattleForTheCastle\BattleForTheCastle\obj\Debug\netcoreapp3.1\BattleForTheCastle.csprojAssemblyReference.cache
+C:\Users\ilian\source\Projets solo\MusicChanger\BattleForTheCastle\BattleForTheCastle\obj\Debug\netcoreapp3.1\BattleForTheCastle.csproj.CoreCompileInputs.cache
+C:\Users\ilian\source\Projets solo\MusicChanger\BattleForTheCastle\BattleForTheCastle\obj\Debug\netcoreapp3.1\BattleForTheCastle.AssemblyInfoInputs.cache
+C:\Users\ilian\source\Projets solo\MusicChanger\BattleForTheCastle\BattleForTheCastle\obj\Debug\netcoreapp3.1\BattleForTheCastle.AssemblyInfo.cs
+C:\Users\ilian\source\Projets solo\MusicChanger\BattleForTheCastle\BattleForTheCastle\obj\Debug\netcoreapp3.1\BattleForTheCastle.dll
+C:\Users\ilian\source\Projets solo\MusicChanger\BattleForTheCastle\BattleForTheCastle\obj\Debug\netcoreapp3.1\BattleForTheCastle.pdb
