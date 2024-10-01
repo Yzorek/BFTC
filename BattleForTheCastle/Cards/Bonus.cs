@@ -1,6 +1,6 @@
 using System;
 
-namespace BattleForTheCastle.Card
+namespace BattleForTheCastle.Cards
 {
 	public enum ElementType
 	{
@@ -30,12 +30,12 @@ namespace BattleForTheCastle.Card
 
 	public class Element
 	{
-		public string Text { get; set; }
+		public string Description { get; set; }
 		public ElementType Type { get; set; }
 
-		public Element(string text, ElementType element)
+		public Element(string description, ElementType element)
 		{
-			Text = text;
+			Description = description;
 			Type = element;
 		}
 

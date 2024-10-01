@@ -1,4 +1,4 @@
-﻿namespace BattleForTheCastle.Card
+﻿namespace BattleForTheCastle.Cards
 {
 	public interface IActivable
 	{

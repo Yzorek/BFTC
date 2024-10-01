@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace BattleForTheCastle.Card
+namespace BattleForTheCastle.Cards
 {
 	public enum Category
 	{
@@ -24,11 +24,17 @@ namespace BattleForTheCastle.Card
 
 	public abstract class MonsterCard : Card
 	{
-		public Dictionary<string, int> Stats { get; set; }
+		public int Attack {  get; set; }
 
-		protected MonsterCard(string name, Dictionary<string, int> stats) : base(name)
+        public int Rank { get; set; }
+
+        public int Food { get; set; }
+
+        protected MonsterCard(string name, int attack, int rank, int food) : base(name)
 		{
-			Stats = stats;
+			Attack = attack;
+			Rank = rank;
+			Food = food;
 		}
 	}
 
@@ -51,7 +57,7 @@ namespace BattleForTheCastle.Card
 	{
 		public Family Family { get; }
 
-		public FamilyCard(string name, Dictionary<string, int> stats, Family family) : base(name, stats)
+		public FamilyCard(string name, int attack, int rank, int food, Family family) : base(name, attack, rank, food)
 		{
 			Family = family;
 		}
@@ -68,7 +74,7 @@ namespace BattleForTheCastle.Card
 			Console.WriteLine("activation!");
 		}
 
-		public NeutralCard(string name, Dictionary<string, int> stats, Category category, int copyNb) : base(name, stats)
+		public NeutralCard(string name, int attack, int rank, int food, Category category, int copyNb) : base(name, attack, rank, food)
 		{
 			Category = category;
 			CopyNb = copyNb;

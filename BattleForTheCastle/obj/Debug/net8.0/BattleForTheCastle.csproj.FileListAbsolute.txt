@@ -1,0 +1,15 @@
+C:\Users\Ilian Baylon\Jeux\Battle For The Castle\BFTC\BattleForTheCastle\bin\Debug\net8.0\BattleForTheCastle.exe
+C:\Users\Ilian Baylon\Jeux\Battle For The Castle\BFTC\BattleForTheCastle\bin\Debug\net8.0\BattleForTheCastle.deps.json
+C:\Users\Ilian Baylon\Jeux\Battle For The Castle\BFTC\BattleForTheCastle\bin\Debug\net8.0\BattleForTheCastle.runtimeconfig.json
+C:\Users\Ilian Baylon\Jeux\Battle For The Castle\BFTC\BattleForTheCastle\bin\Debug\net8.0\BattleForTheCastle.dll
+C:\Users\Ilian Baylon\Jeux\Battle For The Castle\BFTC\BattleForTheCastle\bin\Debug\net8.0\BattleForTheCastle.pdb
+C:\Users\Ilian Baylon\Jeux\Battle For The Castle\BFTC\BattleForTheCastle\obj\Debug\net8.0\BattleForTheCastle.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Ilian Baylon\Jeux\Battle For The Castle\BFTC\BattleForTheCastle\obj\Debug\net8.0\BattleForTheCastle.AssemblyInfoInputs.cache
+C:\Users\Ilian Baylon\Jeux\Battle For The Castle\BFTC\BattleForTheCastle\obj\Debug\net8.0\BattleForTheCastle.AssemblyInfo.cs
+C:\Users\Ilian Baylon\Jeux\Battle For The Castle\BFTC\BattleForTheCastle\obj\Debug\net8.0\BattleForTheCastle.csproj.CoreCompileInputs.cache
+C:\Users\Ilian Baylon\Jeux\Battle For The Castle\BFTC\BattleForTheCastle\obj\Debug\net8.0\BattleForTheCastle.sourcelink.json
+C:\Users\Ilian Baylon\Jeux\Battle For The Castle\BFTC\BattleForTheCastle\obj\Debug\net8.0\BattleForTheCastle.dll
+C:\Users\Ilian Baylon\Jeux\Battle For The Castle\BFTC\BattleForTheCastle\obj\Debug\net8.0\refint\BattleForTheCastle.dll
+C:\Users\Ilian Baylon\Jeux\Battle For The Castle\BFTC\BattleForTheCastle\obj\Debug\net8.0\BattleForTheCastle.pdb
+C:\Users\Ilian Baylon\Jeux\Battle For The Castle\BFTC\BattleForTheCastle\obj\Debug\net8.0\BattleForTheCastle.genruntimeconfig.cache
+C:\Users\Ilian Baylon\Jeux\Battle For The Castle\BFTC\BattleForTheCastle\obj\Debug\net8.0\ref\BattleForTheCastle.dll
