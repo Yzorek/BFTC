@@ -1,19 +1,18 @@
 ﻿using BattleForTheCastle.Game;
 using BattleForTheCastleTests;
 
-namespace BattleForTheCastle.Cards.NeutralCards.Undead.Tests
+namespace BattleForTheCastle.Cards.NeutralCards.Human.Tests
 {
     [TestClass()]
-    public class SkeletonSoldierTests
+    public class AssassinTests
     {
         [TestMethod()]
-        public void ActivateBeforeRevealTest_VersusOtherThanFairie()
+        public void ActivateBeforeRevealTest_VersusOtherThanBubble()
         {
             Player player1 = new Player("Player 1");
             Player player2 = new Player("Player 2");
 
-            player1.Board.Deck.Add(new SkeletonSoldier(player1.Name));
-
+            player1.Board.Deck.Add(new Assassin(player1.Name));
             BoardBuilder.InitBoard("L'invisible", player2);
 
             BoardBuilder.BuildArmy(player1.Board);
@@ -26,18 +25,17 @@ namespace BattleForTheCastle.Cards.NeutralCards.Undead.Tests
 
             ((IActivableBattleBeforeReveal)player1.PickedCard).ActivateBeforeReveal([player1, player2], new Battle(player1, player2, ElementType.Fire), player2);
 
-            Assert.IsTrue(((MonsterCard)player1.PickedCard).EffectiveAttack == 9, "L'attaque effective devrait être de 9.");
+            Assert.IsTrue(((MonsterCard)player1.PickedCard).EffectiveAttack == 16, "L'attaque effective devrait être de 16.");
         }
 
         [TestMethod()]
-        public void ActivateBeforeRevealTest_VersusFairie()
+        public void ActivateBeforeRevealTest_VersusBubble()
         {
             Player player1 = new Player("Player 1");
             Player player2 = new Player("Player 2");
 
-            player1.Board.Deck.Add(new SkeletonSoldier(player1.Name));
-
-            BoardBuilder.InitBoard("Fée 3", player2);
+            player1.Board.Deck.Add(new Assassin(player1.Name));
+            BoardBuilder.InitBoard("Mini bubble", player2);
 
             BoardBuilder.BuildArmy(player1.Board);
             BoardBuilder.BuildArmy(player2.Board);
@@ -49,7 +47,7 @@ namespace BattleForTheCastle.Cards.NeutralCards.Undead.Tests
 
             ((IActivableBattleBeforeReveal)player1.PickedCard).ActivateBeforeReveal([player1, player2], new Battle(player1, player2, ElementType.Fire), player2);
 
-            Assert.IsTrue(((MonsterCard) player1.PickedCard).EffectiveAttack == 13, "L'attaque effective devrait être de 13.");
+            Assert.IsTrue(((MonsterCard)player1.PickedCard).EffectiveAttack == 6, "L'attaque effective devrait être de 6.");
         }
     }
 }

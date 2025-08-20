@@ -26,14 +26,13 @@ namespace BattleForTheCastle.Cards.NeutralCards.Undead
 
         public void ActivateBeforeReveal(List<Player> players, Battle battle, Player opponent)
         {
-            if (!IsDisabled)
+            if (IsDisabled)
+                return;
+            if (opponent.PickedCard is FamilyCard familyCard)
             {
-                if (opponent.PickedCard is FamilyCard familyCard)
+                if (familyCard.Family.Type == FamilyType.Fairie)
                 {
-                    if (familyCard.Family.Type == FamilyType.Fairie)
-                    {
-                       EffectiveAttack += 4;
-                    }
+                    EffectiveAttack += 4;
                 }
             }
         }

@@ -30,6 +30,8 @@ namespace BattleForTheCastle.Cards
 
         public int Food { get; set; }
 
+		public bool IsImmuneToMagic { get; set; } = false;
+
 		public void ResetEffectiveAttack()
 		{
 			EffectiveAttack = BaseAttack;

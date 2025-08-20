@@ -35,10 +35,7 @@ namespace BattleForTheCastle.Cards.NeutralCards.Forest.Tests
             Player player2 = new Player("Player 2");
 
             player1.Board.Deck.Add(new Huntress(player1.Name));
-            BoardBuilder.InitBoard(new List<string>
-            {
-                "L'invisible"
-            }, player2);
+            BoardBuilder.InitBoard("L'invisible", player2);
 
             BoardBuilder.BuildArmy(player1.Board);
             BoardBuilder.BuildArmy(player2.Board);
@@ -83,10 +80,7 @@ namespace BattleForTheCastle.Cards.NeutralCards.Forest.Tests
             Player player2 = new Player("Player 2");
 
             player1.Board.Deck.Add(new Huntress(player1.Name));
-            BoardBuilder.InitBoard(new List<string>
-            {
-                "L'invisible"
-            }, player2);
+            BoardBuilder.InitBoard("L'invisible", player2);
 
             BoardBuilder.BuildArmy(player1.Board);
             BoardBuilder.BuildArmy(player2.Board);

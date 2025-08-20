@@ -1,6 +1,7 @@
 ﻿using BattleForTheCastle.Board;
 using BattleForTheCastle.Cards;
 using BattleForTheCastle.Cards.NeutralCards.Forest;
+using BattleForTheCastle.Cards.NeutralCards.Spirit;
 using BattleForTheCastle.Game;
 
 namespace BattleForTheCastle
@@ -112,7 +113,7 @@ namespace BattleForTheCastle
                     if (j == 1)
                     {
                         player2.Board.Deck.Add(new Huntress());
-                        //player2.Board.Deck.Add(new NeutralCard("Djinn des régions oubliées", 20, 4, 2, Category.Forest, "Tant que ce monstre est dans votre armée, personne ne peut vous voler de carte magie."));
+                        player2.Board.Deck.Add(new JinnOfTheForgottenRegions());
                     }
                     //InitBoardBubbles(player2.Board, families[3]);
                     BuildArmy(player1.Board);

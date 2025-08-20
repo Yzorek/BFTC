@@ -62,5 +62,16 @@ namespace BattleForTheCastleTests
                     player.Name));
             }
         }
+
+        public static void InitBoard(string name, Player player)
+        {
+            player.Board.Deck.Add(new FamilyCard(
+                name,
+                familyCards[name].attack,
+                familyCards[name].rank,
+                familyCards[name].food,
+                familyCards[name].family,
+                player.Name));
+        }
     }
 }

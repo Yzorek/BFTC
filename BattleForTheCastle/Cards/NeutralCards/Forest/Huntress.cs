@@ -25,16 +25,18 @@ namespace BattleForTheCastle.Cards.NeutralCards.Forest
 
         public void ActivateAfterLocking(List<Player> players, Battle battle, Player opponent)
         {
-            if (!IsDisabled)
-                if (opponent.PickedCard is MagicCard && OwnerName != null)
-                    players.First(x => string.Equals(x.Name, OwnerName)).LockedCard = null;
+            if (IsDisabled)
+                return;
+            if (opponent.PickedCard is MagicCard && OwnerName != null)
+                players.First(x => string.Equals(x.Name, OwnerName)).LockedCard = null;
         }
 
         public void ActivateBeforeReveal(List<Player> players, Battle battle, Player opponent)
         {
-            if (!IsDisabled)
-                if (opponent.PickedCard is MagicCard magicCard)
-                    magicCard.IsDisabled = true;
+            if (IsDisabled)
+                return;
+            if (opponent.PickedCard is MagicCard magicCard)
+                magicCard.IsDisabled = true;
         }
     }
 }
