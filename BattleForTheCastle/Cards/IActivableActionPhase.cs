@@ -1,6 +1,6 @@
 ﻿namespace BattleForTheCastle.Cards
 {
-	public interface IActivable
+	public interface IActivableActionPhase
 	{
 		public string Text { get; }
 

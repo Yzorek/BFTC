@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using BattleForTheCastle.Board;
+﻿using BattleForTheCastle.Board;
 using BattleForTheCastle.Cards;
 using BattleForTheCastle.Game;
 
@@ -13,10 +10,10 @@ namespace BattleForTheCastle
 		{
 			List<Family> newList =
             [
-                new Family("Ange", "Blablabla", elements[0]),
-                new Family("Dragon", "Blablabla", elements[1]),
-                new Family("Fee", "Blablabla", elements[2]),
-                new Family("Bubble", "Blablabla", elements[3]),
+                new Family(FamilyType.Angel, "Ange", "Blablabla", elements[0]),
+                new Family(FamilyType.Dragon, "Dragon", "Blablabla", elements[1]),
+                new Family(FamilyType.Fairie, "Fee", "Blablabla", elements[2]),
+                new Family(FamilyType.Bubble, "Bubble", "Blablabla", elements[3]),
             ];
 			return newList;
 		}
@@ -33,7 +30,7 @@ namespace BattleForTheCastle
 			return newList;
 		}
 
-		static void InitBoard1(PlayerBoard board, Family family)
+		static void InitBoardAngels(PlayerBoard board, Family family)
 		{
 			board.Deck.Add(new FamilyCard("Ange 1", 5, 1, 1, family));
 			board.Deck.Add(new FamilyCard("Ange 2", 10, 2, 1, family));
@@ -44,7 +41,7 @@ namespace BattleForTheCastle
 			board.Deck.Add(new FamilyCard("Séraphin", 45, 7, 3, family));
 		}
 
-		static void InitBoard2(PlayerBoard board, Family family)
+		static void InitBoardDragons(PlayerBoard board, Family family)
 		{
 			board.Deck.Add(new FamilyCard("Bébé dragon", 5, 1, 1, family));
 			board.Deck.Add(new FamilyCard("Jeune dragon", 10, 2, 1, family));
@@ -54,35 +51,103 @@ namespace BattleForTheCastle
 			board.Deck.Add(new FamilyCard("Ecaille rouge", 30, 6, 3, family));
 			board.Deck.Add(new FamilyCard("Le déstructeur", 50, 7, 4, family));
 		}
+        static void InitBoardFairies(PlayerBoard board, Family family)
+        {
+            board.Deck.Add(new FamilyCard("Fée 1", 2, 1, 1, family));
+            board.Deck.Add(new FamilyCard("Fée 2", 7, 2, 1, family));
+            board.Deck.Add(new FamilyCard("Fée 3", 12, 3, 1, family));
+            board.Deck.Add(new FamilyCard("Fée 4", 19, 4, 2, family));
+            board.Deck.Add(new FamilyCard("Fée 5", 24, 5, 2, family));
+            board.Deck.Add(new FamilyCard("Fée 6", 35, 6, 3, family));
+            board.Deck.Add(new FamilyCard("Fée 7", 50, 7, 4, family));
+        }
+        static void InitBoardBubbles(PlayerBoard board, Family family)
+        {
+            board.Deck.Add(new FamilyCard("Bébé bubble", 3, 1, 1, family));
+            board.Deck.Add(new FamilyCard("Micro bubble", 5, 2, 1, family));
+            board.Deck.Add(new FamilyCard("Mini bubble", 10, 3, 1, family));
+            board.Deck.Add(new FamilyCard("Moyen bubble", 17, 4, 1, family));
+            board.Deck.Add(new FamilyCard("Grand bubble", 22, 5, 1, family));
+            board.Deck.Add(new FamilyCard("Double bubble", 28, 6, 2, family));
+            board.Deck.Add(new FamilyCard("Maxi bubble", 42, 7, 2, family));
+        }
 
-		static void BuildArmies(PlayerBoard board1, PlayerBoard board2)
+        static void BuildArmy(PlayerBoard board)
+        {
+            int total = board.Deck.Count;
+            for (int i = 0; i < total; i++)
+            {
+                var card = board.Deck.First();
+                board.Deck.Remove(card);
+                board.Army.Add(card);
+            }
+        }
+
+        static void Main(string[] args)
 		{
-			for (int i = 0; i < 3; i++)
+            List<Element> elements = InitElements();
+            List<Family> families = InitFamilies(elements);
+            string docPath =
+              Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+
+			for (int j = 0; j < 2; j++)
 			{
-				var card = board1.Deck.First();
-				board1.Deck.Remove(card);
-				board1.Army.Add(card);
-				card = board2.Deck.First();
-				board2.Deck.Remove(card);
-				board2.Army.Add(card);
-			}
-		}
+                int totalBattles = 1000;
 
-		static void Main(string[] args)
-		{
-			Player player1 = new Player("Player 1");
-			Player player2 = new Player("Player 2");
+                double nbOfP1Wins = 0;
+                double nbOfP2Wins = 0;
+                double nbDraws = 0;
 
-			List<Element> elements = InitElements();
-			List<Family> families = InitFamilies(elements);
+                var random = new Random();
 
-			InitBoard1(player1.Board, families[0]);
-			InitBoard2(player2.Board, families[1]);
-			BuildArmies(player1.Board, player2.Board);
+                for (int i = 0; i < totalBattles; i++)
+                {
+                    Player player1 = new Player("Player 1");
+                    Player player2 = new Player("Player 2");
 
-			Battle newBattle = new Battle(player1, player2, ElementType.Air);
-			newBattle.Start();
-			Console.WriteLine(newBattle.Results.ToString());
+                    //InitBoardAngels(player1.Board, families[0]);
+                    InitBoardDragons(player1.Board, families[1]);
+                    InitBoardFairies(player2.Board, families[2]);
+                    if (j == 1)
+                    {
+                        player2.Board.Deck.Add(new NeutralCard("Chasseresse", 24, 5, 2, Category.Forest, "Si la chasseresse est face à une carte magie, elle l'annule et peut être jouée de nouveau au prochain duel."));
+                        player2.Board.Deck.Add(new NeutralCard("Djinn des régions oubliées", 20, 4, 2, Category.Forest, "Tant que ce monstre est dans votre armée, personne ne peut vous voler de carte magie."));
+                    }
+                    //InitBoardBubbles(player2.Board, families[3]);
+                    BuildArmy(player1.Board);
+                    BuildArmy(player2.Board);
+
+                    Battle newBattle = new Battle(player1, player2, ElementType.Air);
+                    newBattle.Start(random);
+                    if (newBattle.Results == BattleResults.Player1Win)
+                    {
+                        nbOfP1Wins++;
+                    }
+                    if (newBattle.Results == BattleResults.Player2Win)
+                    {
+                        nbOfP2Wins++;
+                    }
+                    if (newBattle.Results == BattleResults.Draw)
+                    {
+                        nbDraws++;
+                    }
+                }
+                if (j == 0)
+                    Console.WriteLine("Result of Battle without neutral :");
+                else
+                    Console.WriteLine("Result of Battle with neutral :");
+                Console.WriteLine("Total P1 wins: " + (nbOfP1Wins / totalBattles * 100).ToString() + "%");
+                Console.WriteLine("Total P2 wins: " + (nbOfP2Wins / totalBattles * 100).ToString() + "%");
+                Console.WriteLine("Total draws: " + (nbDraws / totalBattles * 100).ToString() + "%");
+                Console.WriteLine(Environment.NewLine);
+            }
+
+			//using (StreamWriter outputFile = new StreamWriter(Path.Combine(docPath, "Results.txt")))
+			//{
+			//	outputFile.WriteLine("Total P1 wins: " + (nbOfP1Wins / totalBattles * 100).ToString() + "%");
+			//	outputFile.WriteLine("Total P2 wins: " + (nbOfP2Wins / totalBattles * 100).ToString() + "%");
+			//	outputFile.WriteLine("Total draws: " + (nbDraws / totalBattles * 100).ToString() + "%");
+			//}
 		}
 	}
 }

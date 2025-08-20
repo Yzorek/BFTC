@@ -1,6 +1,3 @@
-using System;
-using System.Collections;
-using System.Linq;
 using BattleForTheCastle.Cards;
 
 namespace BattleForTheCastle.Game
@@ -18,7 +15,6 @@ namespace BattleForTheCastle.Game
 		private Player Player2 { get; set; }
 
 		private ElementType Zone { get; set; }
-		private Card LockedCard { get; set; }
 
 		public BattleResults Results { get; set; }
 
@@ -29,10 +25,12 @@ namespace BattleForTheCastle.Game
 			Zone = zone;
 		}
 
-		void PickCards()
+		void PickCards(Random random)
 		{
-			Player1.PickCard();
-			Player2.PickCard();
+            var playableCards1 = Player1.Board.Army.Where(card => card != Player1.LockedCard).ToList();
+            Player1.PickCard(random.Next(0, playableCards1.Count));
+            var playableCards2 = Player2.Board.Army.Where(card => card != Player2.LockedCard).ToList();
+            Player2.PickCard(random.Next(0, playableCards2.Count));
 		}
 
 		private void Activation(MonsterCard monsterCard1, MonsterCard monsterCard2)
@@ -40,7 +38,13 @@ namespace BattleForTheCastle.Game
             switch (monsterCard1)
             {
                 case NeutralCard neutralCard1:
-                    neutralCard1.Activate();
+					if (neutralCard1 is IActivableBattleBeforeReveal card)
+						card.Activate(new List<Player>()
+						{
+							Player1,
+							Player2
+						},
+						this, Player2);
                     break;
                 case FamilyCard familyCard1:
                     familyCard1.Family.Ability();
@@ -50,12 +54,26 @@ namespace BattleForTheCastle.Game
             switch (monsterCard2)
             {
                 case NeutralCard neutralCard2:
-                    neutralCard2.Activate();
+                    if (neutralCard2 is IActivableBattleBeforeReveal card)
+                        card.Activate(new List<Player>()
+                        {
+                            Player1,
+                            Player2
+                        },
+                        this, Player1);
                     break;
                 case FamilyCard familyCard2:
                     familyCard2.Family.Ability();
                     break;
             }
+        }
+
+		private void PlayerWinResolves(Player playerWin, Player playerLoss)
+		{
+            playerWin.LockCard();
+            playerLoss.UnlockCard();
+            playerWin.EmptyStack(true, playerLoss);
+            playerLoss.EmptyStack(false, playerWin);
         }
 
 		private void Reveal()
@@ -68,58 +86,46 @@ namespace BattleForTheCastle.Game
             switch (card1)
 			{
 				case MonsterCard monsterCard1 when card2 is MonsterCard monsterCard2:
-					Console.WriteLine("Picked cards are: " + monsterCard1.Name + " (" + monsterCard1.Attack +  ")" + " and " + monsterCard2.Name + " (" + monsterCard2.Attack + ")");
+					//Console.WriteLine("Picked cards are: " + monsterCard1.Name + " (" + monsterCard1.Attack +  ")" + " and " + monsterCard2.Name + " (" + monsterCard2.Attack + ")");
 					Activation(monsterCard1, monsterCard2);
 
-					if (monsterCard1.Attack > monsterCard2.Attack)
+					if (monsterCard1.EffectiveAttack > monsterCard2.EffectiveAttack)
 					{
-						Console.WriteLine("P1 wins.");
-						Player1.LockCard();
-						Player2.UnlockCard();
-						Player1.EmptyStack();
-                        Player2.EmptyStackGivingNeutrals(Player1);
+						//Console.WriteLine("P1 wins.");
+                        PlayerWinResolves(Player1, Player2);
                     }
-					else if (monsterCard1.Attack < monsterCard2.Attack)
+					else if (monsterCard1.EffectiveAttack < monsterCard2.EffectiveAttack)
 					{
-						Console.WriteLine("P2 wins.");
-						Player1.UnlockCard();
-						Player2.LockCard();
-						Player1.EmptyStackGivingNeutrals(Player2);
-						Player2.EmptyStack();
+						//Console.WriteLine("P2 wins.");
+						PlayerWinResolves(Player2, Player1);
 					}
 					else
 					{
-						Console.WriteLine("Draw...");
+						//Console.WriteLine("Draw...");
 						Player1.UnlockCard();
 						Player2.UnlockCard();
 					}
 
 					break;
 				case MonsterCard monsterCard1 when card2 is MagicCard magicCard2:
-					Console.WriteLine("Picked cards are: " + monsterCard1.Name + " and " + magicCard2.Name);
-					switch (monsterCard1)
-					{
-						case NeutralCard neutralCard1:
-							neutralCard1.Activate();
-							break;
-						case FamilyCard familyCard1:
-							familyCard1.Family.Ability();
-							break;
-					}
-					break;
+					//Console.WriteLine("Picked cards are: " + monsterCard1.Name + " and " + magicCard2.Name);
+					PlayerWinResolves(Player1, Player2);
+                    break;
 				case MagicCard magicCard1 when card2 is MonsterCard monsterCard2:
-					Console.WriteLine("Picked cards are: " + magicCard1.Name + " and " + monsterCard2.Name);
-					break;
+					//Console.WriteLine("Picked cards are: " + magicCard1.Name + " and " + monsterCard2.Name);
+                    PlayerWinResolves(Player2, Player1);
+                    break;
 				case MagicCard magicCard1 when card2 is MagicCard magicCard2:
-					Console.WriteLine("Picked cards are: " + magicCard1.Name + " and " + magicCard2.Name);
+					//Console.WriteLine("Picked cards are: " + magicCard1.Name + " and " + magicCard2.Name);
+					EmptyStacks();
 					break;
 			}
 		}
 
 		private void EmptyStacks()
 		{
-			Player1.EmptyStack();
-            Player2.EmptyStack();
+			Player1.EmptyStack(true, Player2);
+            Player2.EmptyStack(true, Player1);
         }
 
 		private bool IsBattleOver()
@@ -151,9 +157,9 @@ namespace BattleForTheCastle.Game
 			return BattleResults.Draw;
         }
 
-		public void Start()
+		public void Start(Random random)
 		{
-			Console.WriteLine("Battle starts!");
+			//Console.WriteLine("Battle starts!");
 
 			bool isBattleOver = false;
 
@@ -165,9 +171,9 @@ namespace BattleForTheCastle.Game
 					Results = ApplyResults();
 					continue;
 				}
-				PickCards();
+				PickCards(random);
 				Reveal();
-				Status();
+				//Status();
 			}
 		}
 

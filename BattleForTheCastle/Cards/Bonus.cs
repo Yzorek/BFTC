@@ -9,14 +9,25 @@ namespace BattleForTheCastle.Cards
 		Air,
 		Grass
 	}
-	public class Family
+
+    public enum FamilyType
+    {
+        Angel,
+        Dragon,
+        Fairie,
+        Bubble
+    }
+
+    public class Family
 	{
-		public string Name { get; }
+        public FamilyType Type { get; }
+        public string Name { get; }
 		public string Description { get; }
 		public Element Element { get; }
 
-		public Family(string name, string description, Element element)
+		public Family(FamilyType type, string name, string description, Element element)
 		{
+			Type = type;
 			Name = name;
 			Description = description;
 			Element = element;

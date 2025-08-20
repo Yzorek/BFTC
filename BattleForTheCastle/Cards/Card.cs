@@ -1,3 +1,4 @@
+using BattleForTheCastle.Game;
 using System;
 using System.Collections.Generic;
 
@@ -24,7 +25,9 @@ namespace BattleForTheCastle.Cards
 
 	public abstract class MonsterCard : Card
 	{
-		public int Attack {  get; set; }
+		public int BaseAttack { get; set; }
+
+		public int EffectiveAttack { get; set; }
 
         public int Rank { get; set; }
 
@@ -32,17 +35,23 @@ namespace BattleForTheCastle.Cards
 
         protected MonsterCard(string name, int attack, int rank, int food) : base(name)
 		{
-			Attack = attack;
-			Rank = rank;
+			BaseAttack = attack;
+			EffectiveAttack = attack;
+            Rank = rank;
 			Food = food;
+		}
+
+		public void ResetEffectiveAttack()
+		{
+			EffectiveAttack = BaseAttack;
 		}
 	}
 
-	public class MagicCard : Card, IActivable
+	public class MagicCard : Card, IActivableBattleBeforeReveal
 	{
 		public string Text { get; }
 
-		public void Activate()
+		public void Activate(List<Player> players, Battle battle, Player opponent)
 		{
 			Console.WriteLine("activation!");
 		}
@@ -63,21 +72,15 @@ namespace BattleForTheCastle.Cards
 		}
 	}
 
-	public class NeutralCard : MonsterCard, IActivable
+	public class NeutralCard : MonsterCard
 	{
 		public string Text { get; set; }
-		public int CopyNb { get; set; }
-		public Category Category { get; set; }
+        public Category Category { get; set; }
 
-		public void Activate()
-		{
-			Console.WriteLine("activation!");
-		}
-
-		public NeutralCard(string name, int attack, int rank, int food, Category category, int copyNb) : base(name, attack, rank, food)
-		{
-			Category = category;
-			CopyNb = copyNb;
-		}
-	}
+        public NeutralCard(string name, int attack, int rank, int food, Category category, string text) : base(name, attack, rank, food)
+        {
+            Text = text;
+            Category = category;
+        }
+    }
 }

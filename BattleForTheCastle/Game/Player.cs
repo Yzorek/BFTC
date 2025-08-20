@@ -1,12 +1,5 @@
 ﻿using BattleForTheCastle.Board;
 using BattleForTheCastle.Cards;
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.InteropServices.JavaScript;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BattleForTheCastle.Game
 {
@@ -29,12 +22,11 @@ namespace BattleForTheCastle.Game
             Board = new PlayerBoard();
         }
 
-        public void PickCard()
+        public void PickCard(int cardNumber)
         {
-            Console.WriteLine(Name + " picking...");
-            var rand = new Random();
-            var playableCards1 = Board.Army.Where(card => card != LockedCard).ToList();
-            PickedCard = playableCards1[rand.Next(0, playableCards1.Count)];
+            //Console.WriteLine(Name + " picking...");
+            var playableCards = Board.Army.Where(card => card != LockedCard).ToList();
+            PickedCard = playableCards[cardNumber];
         }
 
         public void LockCard()
@@ -68,9 +60,9 @@ namespace BattleForTheCastle.Game
             return canPlayerPlay;
         }
 
-        public void EmptyStack()
+        public void EmptyStack(bool isBattleWon, Player opponent)
         {
-            bool isFirst = true;
+            bool isFirst = isBattleWon;
             while (BattleStack.Count > 0)
             {
                 var card = BattleStack.Pop();
@@ -83,27 +75,11 @@ namespace BattleForTheCastle.Game
                 switch (card)
                 {
                     case MonsterCard monsterCard:
-                        Board.Recovery.Add(monsterCard);
-                        break;
-                    case MagicCard magicCard:
-                        Board.UsedMagicZone.Add(magicCard);
-                        break;
-                }
-            }
-        }
-
-        public void EmptyStackGivingNeutrals(Player playerReceivingNeutrals)
-        {
-            while (BattleStack.Count > 0)
-            {
-                var card = BattleStack.Pop();
-                switch (card)
-                {
-                    case NeutralCard neutralCard:
-                        playerReceivingNeutrals.Board.Recovery.Add(neutralCard);
-                        break;
-                    case FamilyCard familyCard:
-                        Board.Recovery.Add(familyCard);
+                        monsterCard.ResetEffectiveAttack();
+                        if (isBattleWon == false && monsterCard is NeutralCard)
+                            opponent.Board.Recovery.Add(monsterCard);
+                        else
+                            Board.Recovery.Add(monsterCard);
                         break;
                     case MagicCard magicCard:
                         Board.UsedMagicZone.Add(magicCard);
