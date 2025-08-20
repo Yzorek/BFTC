@@ -1,6 +1,4 @@
 using BattleForTheCastle.Game;
-using System;
-using System.Collections.Generic;
 
 namespace BattleForTheCastle.Cards
 {
@@ -15,12 +13,11 @@ namespace BattleForTheCastle.Cards
 
 	public abstract class Card
 	{
-		public string Name { get; set; }
+		public string? Name { get; set; }
 
-		protected Card(string name)
-		{
-			Name = name;
-		}
+		public string? OwnerName { get; set; } = null;
+
+		public bool IsDisabled { get; set; } = false;
 	}
 
 	public abstract class MonsterCard : Card
@@ -33,14 +30,6 @@ namespace BattleForTheCastle.Cards
 
         public int Food { get; set; }
 
-        protected MonsterCard(string name, int attack, int rank, int food) : base(name)
-		{
-			BaseAttack = attack;
-			EffectiveAttack = attack;
-            Rank = rank;
-			Food = food;
-		}
-
 		public void ResetEffectiveAttack()
 		{
 			EffectiveAttack = BaseAttack;
@@ -51,12 +40,12 @@ namespace BattleForTheCastle.Cards
 	{
 		public string Text { get; }
 
-		public void Activate(List<Player> players, Battle battle, Player opponent)
+		public void ActivateBeforeReveal(List<Player> players, Battle battle, Player opponent)
 		{
 			Console.WriteLine("activation!");
 		}
 
-		public MagicCard(string name, string text) : base(name)
+		public MagicCard(string name, string text)
 		{
 			Text = text;
 		}
@@ -66,21 +55,36 @@ namespace BattleForTheCastle.Cards
 	{
 		public Family Family { get; }
 
-		public FamilyCard(string name, int attack, int rank, int food, Family family) : base(name, attack, rank, food)
+		public FamilyCard(string name, int attack, int rank, int food, Family family, string ownerName)
 		{
-			Family = family;
-		}
+			Name = name;
+            BaseAttack = attack;
+            EffectiveAttack = attack;
+            Rank = rank;
+            Food = food;
+            Family = family;
+			OwnerName = ownerName;
+        }
 	}
 
-	public class NeutralCard : MonsterCard
+	public abstract class NeutralCard : MonsterCard
 	{
-		public string Text { get; set; }
+		public string? Text { get; set; }
         public Category Category { get; set; }
 
-        public NeutralCard(string name, int attack, int rank, int food, Category category, string text) : base(name, attack, rank, food)
-        {
-            Text = text;
-            Category = category;
+		public NeutralCard()
+		{
+			Initialize();
         }
+
+        public NeutralCard(string ownerName)
+        {
+			Initialize();
+            OwnerName = ownerName;
+        }
+
+		public virtual void Initialize()
+		{
+		}
     }
 }

@@ -77,7 +77,10 @@ namespace BattleForTheCastle.Game
                     case MonsterCard monsterCard:
                         monsterCard.ResetEffectiveAttack();
                         if (isBattleWon == false && monsterCard is NeutralCard)
+                        {
+                            monsterCard.OwnerName = opponent.Name;
                             opponent.Board.Recovery.Add(monsterCard);
+                        }
                         else
                             Board.Recovery.Add(monsterCard);
                         break;

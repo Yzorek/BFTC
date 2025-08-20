@@ -35,7 +35,7 @@ namespace BattleForTheCastle.Cards
 
 		public void Ability()
 		{
-			Console.WriteLine("ability on!");
+			//Console.WriteLine("ability on!");
 		}
 	}
 

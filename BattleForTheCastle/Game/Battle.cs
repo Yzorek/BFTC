@@ -33,44 +33,33 @@ namespace BattleForTheCastle.Game
             Player2.PickCard(random.Next(0, playableCards2.Count));
 		}
 
-		private void Activation(MonsterCard monsterCard1, MonsterCard monsterCard2)
+		private void BeforeRevealActivation(Card card)
 		{
-            switch (monsterCard1)
-            {
-                case NeutralCard neutralCard1:
-					if (neutralCard1 is IActivableBattleBeforeReveal card)
-						card.Activate(new List<Player>()
-						{
-							Player1,
-							Player2
-						},
-						this, Player2);
-                    break;
-                case FamilyCard familyCard1:
-                    familyCard1.Family.Ability();
-                    break;
-            }
-
-            switch (monsterCard2)
-            {
-                case NeutralCard neutralCard2:
-                    if (neutralCard2 is IActivableBattleBeforeReveal card)
-                        card.Activate(new List<Player>()
-                        {
-                            Player1,
-                            Player2
-                        },
-                        this, Player1);
-                    break;
-                case FamilyCard familyCard2:
-                    familyCard2.Family.Ability();
-                    break;
-            }
+			if (card is IActivableBattleBeforeReveal activableCard)
+				activableCard.ActivateBeforeReveal(new List<Player>()
+				{
+					Player1,
+					Player2
+				},
+				this, Player2);
         }
 
-		private void PlayerWinResolves(Player playerWin, Player playerLoss)
+        private void AfterLockActivation(Card card)
+        {
+            if (card is IActivableBattleAfterLocking activableCard)
+                activableCard.ActivateAfterLocking(new List<Player>()
+                {
+                    Player1,
+                    Player2
+                },
+                this, Player2);
+        }
+
+        private void PlayerWinResolves(Player playerWin, Player playerLoss)
 		{
             playerWin.LockCard();
+			AfterLockActivation(Player1.PickedCard);
+			AfterLockActivation(Player2.PickedCard);
             playerLoss.UnlockCard();
             playerWin.EmptyStack(true, playerLoss);
             playerLoss.EmptyStack(false, playerWin);
@@ -87,7 +76,8 @@ namespace BattleForTheCastle.Game
 			{
 				case MonsterCard monsterCard1 when card2 is MonsterCard monsterCard2:
 					//Console.WriteLine("Picked cards are: " + monsterCard1.Name + " (" + monsterCard1.Attack +  ")" + " and " + monsterCard2.Name + " (" + monsterCard2.Attack + ")");
-					Activation(monsterCard1, monsterCard2);
+					BeforeRevealActivation(monsterCard1);
+					BeforeRevealActivation(monsterCard2);
 
 					if (monsterCard1.EffectiveAttack > monsterCard2.EffectiveAttack)
 					{

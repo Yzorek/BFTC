@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("BattleForTheCastleTests")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+3888e18887db89ae254521396d66952cd3afbffe")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+a7cea23f0da66034256ee861ec94e6d616b61ad0")]
 [assembly: System.Reflection.AssemblyProductAttribute("BattleForTheCastleTests")]
 [assembly: System.Reflection.AssemblyTitleAttribute("BattleForTheCastleTests")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

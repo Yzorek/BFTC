@@ -1,5 +1,6 @@
 ﻿using BattleForTheCastle.Board;
 using BattleForTheCastle.Cards;
+using BattleForTheCastle.Cards.NeutralCards.Forest;
 using BattleForTheCastle.Game;
 
 namespace BattleForTheCastle
@@ -30,46 +31,46 @@ namespace BattleForTheCastle
 			return newList;
 		}
 
-		static void InitBoardAngels(PlayerBoard board, Family family)
+		static void InitBoardAngels(Player player, Family family)
 		{
-			board.Deck.Add(new FamilyCard("Ange 1", 5, 1, 1, family));
-			board.Deck.Add(new FamilyCard("Ange 2", 10, 2, 1, family));
-			board.Deck.Add(new FamilyCard("L'invisible", 12, 3, 1, family));
-			board.Deck.Add(new FamilyCard("Dame céleste", 20, 4, 2, family));
-			board.Deck.Add(new FamilyCard("Cupidon", 22, 5, 2, family));
-			board.Deck.Add(new FamilyCard("Archange", 35, 6, 3, family));
-			board.Deck.Add(new FamilyCard("Séraphin", 45, 7, 3, family));
+            player.Board.Deck.Add(new FamilyCard("Ange 1", 5, 1, 1, family, player.Name));
+            player.Board.Deck.Add(new FamilyCard("Ange 2", 10, 2, 1, family, player.Name));
+            player.Board.Deck.Add(new FamilyCard("L'invisible", 12, 3, 1, family, player.Name));
+            player.Board.Deck.Add(new FamilyCard("Dame céleste", 20, 4, 2, family, player.Name));
+            player.Board.Deck.Add(new FamilyCard("Cupidon", 22, 5, 2, family, player.Name));
+            player.Board.Deck.Add(new FamilyCard("Archange", 35, 6, 3, family, player.Name));
+            player.Board.Deck.Add(new FamilyCard("Séraphin", 45, 7, 3, family, player.Name));
 		}
 
-		static void InitBoardDragons(PlayerBoard board, Family family)
+		static void InitBoardDragons(Player player, Family family)
 		{
-			board.Deck.Add(new FamilyCard("Bébé dragon", 5, 1, 1, family));
-			board.Deck.Add(new FamilyCard("Jeune dragon", 10, 2, 1, family));
-			board.Deck.Add(new FamilyCard("Dragon azur", 15, 3, 2, family));
-			board.Deck.Add(new FamilyCard("Dragon or", 20, 4, 2, family));
-			board.Deck.Add(new FamilyCard("Ancien dragon", 25, 5, 3, family));
-			board.Deck.Add(new FamilyCard("Ecaille rouge", 30, 6, 3, family));
-			board.Deck.Add(new FamilyCard("Le déstructeur", 50, 7, 4, family));
+            player.Board.Deck.Add(new FamilyCard("Bébé dragon", 5, 1, 1, family, player.Name));
+            player.Board.Deck.Add(new FamilyCard("Jeune dragon", 10, 2, 1, family, player.Name));
+            player.Board.Deck.Add(new FamilyCard("Dragon azur", 15, 3, 2, family, player.Name));
+            player.Board.Deck.Add(new FamilyCard("Dragon or", 20, 4, 2, family, player.Name));
+            player.Board.Deck.Add(new FamilyCard("Ancien dragon", 25, 5, 3, family, player.Name));
+            player.Board.Deck.Add(new FamilyCard("Ecaille rouge", 30, 6, 3, family, player.Name));
+            player.Board.Deck.Add(new FamilyCard("Le déstructeur", 50, 7, 4, family, player.Name));
 		}
-        static void InitBoardFairies(PlayerBoard board, Family family)
+        static void InitBoardFairies(Player player, Family family)
         {
-            board.Deck.Add(new FamilyCard("Fée 1", 2, 1, 1, family));
-            board.Deck.Add(new FamilyCard("Fée 2", 7, 2, 1, family));
-            board.Deck.Add(new FamilyCard("Fée 3", 12, 3, 1, family));
-            board.Deck.Add(new FamilyCard("Fée 4", 19, 4, 2, family));
-            board.Deck.Add(new FamilyCard("Fée 5", 24, 5, 2, family));
-            board.Deck.Add(new FamilyCard("Fée 6", 35, 6, 3, family));
-            board.Deck.Add(new FamilyCard("Fée 7", 50, 7, 4, family));
+            player.Board.Deck.Add(new FamilyCard("Fée 1", 2, 1, 1, family, player.Name));
+            player.Board.Deck.Add(new FamilyCard("Fée 2", 7, 2, 1, family, player.Name));
+            player.Board.Deck.Add(new FamilyCard("Fée 3", 12, 3, 1, family, player.Name));
+            player.Board.Deck.Add(new FamilyCard("Fée 4", 19, 4, 2, family, player.Name));
+            player.Board.Deck.Add(new FamilyCard("Fée 5", 24, 5, 2, family, player.Name));
+            player.Board.Deck.Add(new FamilyCard("Fée 6", 35, 6, 3, family, player.Name));
+            player.Board.Deck.Add(new FamilyCard("Fée 7", 50, 7, 4, family, player.Name));
         }
-        static void InitBoardBubbles(PlayerBoard board, Family family)
+        static void InitBoardBubbles(Player player, Family family)
         {
-            board.Deck.Add(new FamilyCard("Bébé bubble", 3, 1, 1, family));
-            board.Deck.Add(new FamilyCard("Micro bubble", 5, 2, 1, family));
-            board.Deck.Add(new FamilyCard("Mini bubble", 10, 3, 1, family));
-            board.Deck.Add(new FamilyCard("Moyen bubble", 17, 4, 1, family));
-            board.Deck.Add(new FamilyCard("Grand bubble", 22, 5, 1, family));
-            board.Deck.Add(new FamilyCard("Double bubble", 28, 6, 2, family));
-            board.Deck.Add(new FamilyCard("Maxi bubble", 42, 7, 2, family));
+            player.Board.Deck.Add(new FamilyCard("Bébé bubble", 3, 1, 1, family, player.Name));
+            player.Board.Deck.Add(new FamilyCard("Micro bubble", 5, 2, 1, family, player.Name));
+            player.Board.Deck.Add(new FamilyCard("Mini bubble", 10, 3, 1, family, player.Name));
+            player.Board.Deck.Add(new FamilyCard("Moyen bubble", 17, 4, 1, family, player.Name));
+            player.Board.Deck.Add(new FamilyCard("Grand bubble", 22, 5, 1, family, player.Name));
+            player.Board.Deck.Add(new FamilyCard("Double bubble", 28, 6, 2, family, player.Name));
+            player.Board.Deck.Add(new FamilyCard("Maxi bubble", 42, 7, 2, family, player.Name));
         }
 
         static void BuildArmy(PlayerBoard board)
@@ -106,12 +107,12 @@ namespace BattleForTheCastle
                     Player player2 = new Player("Player 2");
 
                     //InitBoardAngels(player1.Board, families[0]);
-                    InitBoardDragons(player1.Board, families[1]);
-                    InitBoardFairies(player2.Board, families[2]);
+                    InitBoardDragons(player1, families[1]);
+                    InitBoardFairies(player2, families[2]);
                     if (j == 1)
                     {
-                        player2.Board.Deck.Add(new NeutralCard("Chasseresse", 24, 5, 2, Category.Forest, "Si la chasseresse est face à une carte magie, elle l'annule et peut être jouée de nouveau au prochain duel."));
-                        player2.Board.Deck.Add(new NeutralCard("Djinn des régions oubliées", 20, 4, 2, Category.Forest, "Tant que ce monstre est dans votre armée, personne ne peut vous voler de carte magie."));
+                        player2.Board.Deck.Add(new Huntress());
+                        //player2.Board.Deck.Add(new NeutralCard("Djinn des régions oubliées", 20, 4, 2, Category.Forest, "Tant que ce monstre est dans votre armée, personne ne peut vous voler de carte magie."));
                     }
                     //InitBoardBubbles(player2.Board, families[3]);
                     BuildArmy(player1.Board);
